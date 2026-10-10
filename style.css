@@ -839,3 +839,153 @@ footer p {
     font-size: 1.15rem;
   }
 }
+/* ================= ABOUT SLIDER ================= */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.about-slider-wrap {
+  width: 100%;
+}
+
+.about-slider {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+  border: 5px solid #ffffff;
+  background: #0d2b26;
+}
+
+.about-slider .slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  z-index: 1;
+}
+
+.about-slider .slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.about-slider .slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Caption on each slide */
+.slide-caption {
+  position: absolute;
+  bottom: 55px;
+  left: 20px;
+  background: rgba(13, 43, 38, 0.85);
+  color: #f9f1e7;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-left: 4px solid #c49a6c;
+  z-index: 5;
+}
+
+/* Dots Indicator */
+.slider-dots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 8px 14px;
+  border-radius: 30px;
+  backdrop-filter: blur(4px);
+}
+
+.slider-dots .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-block;
+}
+
+.slider-dots .dot.active {
+  background: #c49a6c;
+  width: 28px;
+  border-radius: 6px;
+}
+
+.slider-dots .dot:hover {
+  background: #ffffff;
+}
+
+/* About text */
+.about-text p {
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+  color: #2c3e3a;
+  line-height: 1.7;
+}
+
+/* Mobile Responsive */
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .about-slider {
+    height: 280px;
+  }
+}
+
+@media (max-width: 520px) {
+  .about-slider {
+    height: 220px;
+    border-width: 4px;
+  }
+
+  .slide-caption {
+    font-size: 0.82rem;
+    padding: 6px 14px;
+    bottom: 48px;
+    left: 12px;
+  }
+
+  .slider-dots {
+    bottom: 10px;
+    padding: 6px 12px;
+    gap: 8px;
+  }
+
+  .slider-dots .dot {
+    width: 9px;
+    height: 9px;
+  }
+
+  .slider-dots .dot.active {
+    width: 20px;
+  }
+
+  .about-text p {
+    font-size: 0.98rem;
+  }
+}
+
