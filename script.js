@@ -99,3 +99,78 @@ revealElements.forEach(el => revealObserver.observe(el));
 
 // ---------- INITIAL ACTIVE LINK (home) ----------
 window.dispatchEvent(new Event('scroll'));
+/* =====================================================
+   ABOUT SECTION - AUTO SLIDING PHOTOS
+   ===================================================== */
+
+(function () {
+  const slides = document.querySelectorAll('.about-slider .slide');
+  const dots = document.querySelectorAll('.about-slider .dot');
+
+  if (slides.length === 0) return;
+
+  let currentIndex = 0;
+  let slideInterval;
+  const SLIDE_DURATION = 3000; // 3 second - change kar sakti hain
+
+  // Function: Show specific slide
+  function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+
+    slides[index].classList.add('active');
+    if (dots[index]) {
+      dots[index].classList.add('active');
+    }
+
+    currentIndex = index;
+  }
+
+  // Function: Next slide
+  function nextSlide() {
+    const next = (currentIndex + 1) % slides.length;
+    showSlide(next);
+  }
+
+  // Start auto-slide
+  function startSlider() {
+    slideInterval = setInterval(nextSlide, SLIDE_DURATION);
+  }
+
+  // Stop auto-slide
+  function stopSlider() {
+    clearInterval(slideInterval);
+  }
+
+  // Dot click - manual navigation
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      stopSlider();
+      showSlide(index);
+      startSlider();
+    });
+  });
+
+  // Pause on hover (desktop)
+  const sliderContainer = document.querySelector('.about-slider');
+  if (sliderContainer) {
+    sliderContainer.addEventListener('mouseenter', stopSlider);
+    sliderContainer.addEventListener('mouseleave', startSlider);
+
+    // Touch pause (mobile)
+    sliderContainer.addEventListener('touchstart', stopSlider);
+    sliderContainer.addEventListener('touchend', startSlider);
+  }
+
+  // Start slider
+  startSlider();
+
+  // Restart when page becomes visible
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stopSlider();
+    } else {
+      startSlider();
+    }
+  });
+})();
